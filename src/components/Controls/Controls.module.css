@@ -25,11 +25,17 @@
   cursor: pointer;
 }
 
-.obj {
+.disabled {
+  composes: button;
+  color: black;
+  background-color: grey;
+  pointer-events: none;
+}
 
+/* .obj {
   pointer-events: none;
   background-color: #bdbdbd;
-}
+} */
 
 .button:hover {
   background-color: #1f65d6;

@@ -10,7 +10,7 @@ const Controls = ({ butPrev, butNext, handlPrevArticle, handlNextArticle }) => {
       <button
         type="button"
         disabled={butPrev}
-        onClick={handlPrevArticle}
+        onClick={butPrev ? null : handlPrevArticle}
         className={butPrevClass}
       >
         BACK
@@ -18,7 +18,7 @@ const Controls = ({ butPrev, butNext, handlPrevArticle, handlNextArticle }) => {
       <button
         type="button"
         disabled={butNext}
-        onClick={handlNextArticle}
+        onClick={butNext ? null : handlNextArticle}
         className={butNextClass}
       >
         NEXT

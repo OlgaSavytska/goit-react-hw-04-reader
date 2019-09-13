@@ -20,11 +20,11 @@ class Reader extends Component {
     super(props, items);
 
     this.state = {
-      publication: this.props.items[0],
+      // publication: this.props.items[0],
       total: this.props.items.length,
       values: 1,
-      butPrev: true,
-      butNext: false,
+      // butPrev: true,
+      // butNext: false,
     };
 
   }
@@ -33,8 +33,8 @@ class Reader extends Component {
     const parse = Number(getItemFromLocation(this.props.location));
     this.setState({
       values: parse,
-      butPrev: parse === 1 ? type.TRUE : type.FALSE,
-      butNext: parse === 12 ? type.FALSE : type.TRUE,
+      // butPrev: parse === 1 ? type.TRUE : type.FALSE,
+      // butNext: parse === 12 ? type.FALSE : type.TRUE,
     });
 
   }
@@ -43,32 +43,32 @@ class Reader extends Component {
     const { values } = this.state;
     const { history, location } = this.props;
     if (prevState.values !== values) {
-      this.props.history.push({ ...this.props.location, search: `item=${values}` })
+      history.push({ ...location, search: `item=${values}` })
     }
   }
 
   handlPrevArticle = () => {
     this.setState(prevState => ({
-      publication: this.props.items[prevState.values - 1],
       values: prevState.values - 1,
-      butPrev: prevState.values === 1 && !prevState.butPrev,
-      butNext:
-        prevState.values === this.props.items.length && !prevState.butNext,
+      // butPrev: prevState.values === 2 ? type.TRUE : type.FALSE,
     }));
   };
 
   handlNextArticle = () => {
     this.setState(prevState => ({
-      publication: this.props.items[prevState.values + 1],
       values: prevState.values + 1,
-      butPrev: prevState.values === 1 && !prevState.butPrev,
-      butNext:
-        prevState.values === this.props.items.length - 1 && !prevState.butNext,
+      // butNext:
+      // prevState.values === this.props.items.length - 1 ? type.TRUE : type.FALSE,
     }));
   };
 
   render() {
-    const { publication, total, values, butPrev, butNext } = this.state;
+    const { total, values } = this.state;
+    const { items } = this.props;
+    const publication = items[values - 1];
+
+    const butNext = values === total ? type.TRUE : type.FALSE;
+    const butPrev = values === 1 ? type.TRUE : type.FALSE;
 
     return (
       <div className={styled4.reader}>
